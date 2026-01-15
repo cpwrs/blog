@@ -7,7 +7,7 @@
 {#if commit}
   <nav>
     <a
-      href="https://github.com/cpwrs/carsonp.net/tree/{commit}"
+      href="https://github.com/cpwrs/blog/tree/{commit}"
       aria-label="View commit {commit} on GitHub"
     >
       <img class="icon" src={git} alt="Git Logo" />
