@@ -61,9 +61,9 @@
             description = "Port to host the blog on";
           };
           secretEnv = mkOption {
-            type = types.file;
+            type = types.path;
             description = ''
-              Environment file providing the secrets needed to run this app in production.
+              Path to an environment file providing the secrets needed to run this app in production.
               Specifically, the blog requires read access to cpwrs GitHub profile via a GITHUB_TOKEN.
             '';
           };
