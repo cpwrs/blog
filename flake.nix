@@ -82,13 +82,13 @@
             serviceConfig = {
               User = "carson";
               Group = "users";
-              ExecStart = "${pkgs.nodejs_20}/bin/node ${self.packages.default}/build";
-              WorkingDirectory = "${self.packages.default}";
-              EnvironmentFile = secretEnv;
+              ExecStart = "${pkgs.nodejs_20}/bin/node ${self.packages.${system}.default}/build";
+              WorkingDirectory = "${self.packages.${system}.default}";
+              EnvironmentFile = config.blogRuntime.secretEnv;
               Environment = [
                 "PROD=1"
                 "NODE_ENV=production"
-                "PORT=${toString port}"
+                "PORT=${toString config.blogRuntime.port}"
               ];
             };
           };
