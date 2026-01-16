@@ -22,7 +22,6 @@
 
 <style>
   nav {
-    margin-top: auto;
     display: flex;
     column-gap: 2ch;
     align-items: center;
