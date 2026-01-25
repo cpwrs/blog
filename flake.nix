@@ -34,7 +34,7 @@
     packages.${system}.default = pkgs.buildNpmPackage {
       name = "blog";
       src = ./.;
-      npmDepsHash = "sha256-zqpWINaUCYz97D4tuG1YPEkr3mkkGPWRD06nPOT4ndk=";
+      npmDepsHash = "sha256-oETbHrzBI1rIsffC12CFfuTgYeNVoCht/9SshEurJPE=";
       npmBuildScript = "build";
       installPhase = ''
         runHook preInstall
