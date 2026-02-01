@@ -5,12 +5,12 @@
   import mail from "$lib/mail.svg";
 </script>
 
-<!-- {#if commit} -->
-  <nav>
-    <a href="mailto:carson@linux.com">
-      <img class="icon" src={mail} alt="Email Icon" />
-      <span class="email">carson@linux.com</span>
-    </a>
+<nav>
+  <a href="mailto:carson@linux.com">
+    <img class="icon" src={mail} alt="Email Icon" />
+    <span class="email">carson@linux.com</span>
+  </a>
+  {#if commit}
     <a
       href="https://github.com/cpwrs/blog/tree/{commit}"
       aria-label="View commit {commit} on GitHub"
@@ -18,12 +18,12 @@
       <img class="icon" src={git} alt="Git Logo" />
       <span>Source</span>
     </a>
-    <a href="">
-      <img class="icon" src={rss} alt="RSS Logo" />
-      <span>Feed</span>
-    </a>
-  </nav>
-<!-- {/if} -->
+  {/if}
+  <a href="">
+    <img class="icon" src={rss} alt="RSS Logo" />
+    <span>Feed</span>
+  </a>
+</nav>
 
 <style>
   nav {
