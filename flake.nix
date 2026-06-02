@@ -82,7 +82,7 @@
                 DynamicUser = true;
                 Restart = "on-failure";
                 RestartSec = 5;
-                ExecStart = "${lib.getExe pkgs.nodejs_20} ${self.packages.${pkgs.system}.default}/build";
+                ExecStart = "${lib.getExe pkgs.nodejs} ${self.packages.${pkgs.system}.default}/build";
                 WorkingDirectory = "${self.packages.${pkgs.system}.default}";
                 EnvironmentFile = config.blog.secretEnv;
                 Environment = [
