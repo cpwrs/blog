@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
     agenix = {
       url = "github:ryantm/agenix";
@@ -28,7 +28,7 @@
           packages = with pkgs; [
             alejandra
             nixd
-            nodejs_20
+            nodejs
             svelte-language-server
             typescript-language-server
             inputs.agenix.packages.${system}.default
