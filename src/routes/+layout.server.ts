@@ -2,6 +2,8 @@ import { env } from '$env/dynamic/private';
 import type { LayoutServerLoad } from './$types';
 
 const GITHUB_USERNAME = 'cpwrs';
+const ONE_DAY = 86400_000;
+
 const QUERY = `
   query($userName:String!) {
     user(login: $userName){
@@ -20,51 +22,92 @@ const QUERY = `
   }
 `;
 
-async function fetchGitHubContributions() {
+let contributions: number[][] | null = null;
+let fetchedAt: number | null = null;
+let refreshPromise: Promise<number[][]> | null = null;
+
+async function fetchGitHubContributions(): Promise<number[][]> {
+  if (!env.GITHUB_TOKEN) {
+    throw new Error('GITHUB_TOKEN is not set');
+  }
+
   const response = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${env.GITHUB_TOKEN}`,
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       query: QUERY,
-      variables: { userName: GITHUB_USERNAME }
-    })
+      variables: { userName: GITHUB_USERNAME },
+    }),
   });
 
+  if (!response.ok) {
+    throw new Error(`GitHub API request failed: ${response.status}`);
+  }
+
   const data = await response.json();
-  const calendar = data.data.user.contributionsCollection.contributionCalendar;
-  const contributions = calendar.weeks.map((week: any) =>
+
+  const calendar =
+    data.data?.user?.contributionsCollection?.contributionCalendar;
+
+  if (!calendar) {
+    throw new Error('GitHub API response did not include contribution calendar');
+  }
+
+  return calendar.weeks.map((week: any) =>
     week.contributionDays.map((day: any) => day.contributionCount),
   );
+}
+
+function refreshContributions(): Promise<number[][]> {
+  refreshPromise ??= fetchGitHubContributions()
+    .then((fresh) => {
+      contributions = fresh;
+      fetchedAt = Date.now();
+      return fresh;
+    })
+    .finally(() => {
+      refreshPromise = null;
+    });
+
+  return refreshPromise;
+}
+
+async function getContributions(): Promise<number[][] | null> {
+  if (!env.GITHUB_TOKEN) {
+    return null;
+  }
+
+  const stale =
+    fetchedAt === null ||
+    Date.now() - fetchedAt > ONE_DAY;
+
+  if (!contributions) {
+    try {
+      return await refreshContributions();
+    } catch (error) {
+      console.error('Failed to fetch GitHub contributions:', error);
+      return null;
+    }
+  }
+
+  if (stale) {
+    void refreshContributions().catch((error) => {
+      console.error('Failed to refresh GitHub contributions:', error);
+    });
+  }
 
   return contributions;
 }
 
-function fakeContributions(): number[][] {
-  let contrib = new Array(52); // 52 weeks
-  for (let w = 0; w < contrib.length; w++) {
-    contrib[w] = new Array(7);
-    let week = contrib[w];
-    for (let d = 0; d < week.length; d++) {
-      week[d] = Math.floor(Math.pow(Math.random(), 8) * 21);
-    }
-  }
-  return contrib;
-}
-
 export const load: LayoutServerLoad = ({ setHeaders }) => {
-  // Cache contributions for a day
   setHeaders({
-    'cache-control': 'public, max-age=86400'
-  })
+    'cache-control': 'public, max-age=3600',
+  });
 
-  // Return fake contribution data in a dev environment
-  const prod = env.PROD === '1';
-  return prod ? {
-    contributions: (env.GITHUB_TOKEN ? fetchGitHubContributions() : null),
-  } : {
-    contributions: fakeContributions(),
-  }
+  return {
+    contributions: getContributions(),
+  };
 };

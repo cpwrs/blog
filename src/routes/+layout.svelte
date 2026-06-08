@@ -15,7 +15,9 @@
 
 <Header />
 {#await data.contributions then contributions}
-  <Contributions {contributions} />
+  {#if contributions}
+    <Contributions {contributions} />
+  {/if}
 {/await}
 
 {@render children()}
