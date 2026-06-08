@@ -75,7 +75,7 @@ function refreshContributions(): Promise<number[][]> {
   return refreshPromise;
 }
 
-async function getContributions(): Promise<number[][] | null> {
+function getContributions(): number[][] | Promise<number[][] | null> | null {
   if (!env.GITHUB_TOKEN) {
     return null;
   }
@@ -85,12 +85,10 @@ async function getContributions(): Promise<number[][] | null> {
     Date.now() - fetchedAt > ONE_DAY;
 
   if (!contributions) {
-    try {
-      return await refreshContributions();
-    } catch (error) {
+    return refreshContributions().catch((error) => {
       console.error('Failed to fetch GitHub contributions:', error);
       return null;
-    }
+    });
   }
 
   if (stale) {

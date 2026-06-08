@@ -26,14 +26,13 @@
           ];
 
           PUBLIC_COMMIT = "";
-          PROD = 0;
         };
 
         packages.default = pkgs.buildNpmPackage {
           pname = "blog";
           version = self.shortRev or "dirty";
           src = ./.;
-          npmDepsHash = "sha256-ZO41iGIyqsPLev/CSVc+IOBbg/tbkW7J3VH9oPYokIw=";
+          npmDepsHash = "sha256-/mRgu3CXpvA3rb1I9j7K0GRCXfx+q+0ERFyMj/Q1hyA=";
           npmBuildScript = "build";
           installPhase = ''
             runHook preInstall
@@ -86,7 +85,6 @@
                 WorkingDirectory = "${self.packages.${pkgs.system}.default}";
                 EnvironmentFile = config.blog.secretEnv;
                 Environment = [
-                  "PROD=1"
                   "NODE_ENV=production"
                   "PORT=${toString config.blog.port}"
                 ];
