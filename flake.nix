@@ -59,6 +59,11 @@
               default = 8000;
               description = "Port to host the blog on";
             };
+            address = mkOption {
+              type = types.str;
+              default = "::1";
+              description = "IP address to run the blog on";
+            };
             secretEnv = mkOption {
               type = types.path;
               description = ''
@@ -86,6 +91,7 @@
                 EnvironmentFile = config.blog.secretEnv;
                 Environment = [
                   "NODE_ENV=production"
+                  "HOST=${config.blog.address}"
                   "PORT=${toString config.blog.port}"
                 ];
               };
