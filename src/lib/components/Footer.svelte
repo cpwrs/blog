@@ -8,20 +8,22 @@
 <nav>
   <a href="mailto:carson@linux.com">
     <img class="icon" src={mail} alt="Email Icon" />
-    <span class="email">carson@linux.com</span>
+    <span class="email">Email</span>
   </a>
-  {#if commit}
-    <a
-      href="https://github.com/cpwrs/blog/tree/{commit}"
-      aria-label="View commit {commit} on GitHub"
-    >
-      <img class="icon" src={git} alt="Git Logo" />
-      <span>Source</span>
-    </a>
-  {/if}
+  <a
+    href={commit
+      ? `https://github.com/cpwrs/blog/tree/${commit}`
+      : "https://github.com/cpwrs/blog"}
+    aria-label={commit
+      ? `View commit ${commit} on GitHub`
+      : "View repository on GitHub"}
+  >
+    <img class="icon" src={git} alt="Git Logo" />
+    <span>Patch</span>
+  </a>
   <a href="">
     <img class="icon" src={rss} alt="RSS Logo" />
-    <span>Feed</span>
+    <span>Subscribe</span>
   </a>
 </nav>
 
@@ -35,7 +37,7 @@
     font-style: bold;
     & a {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       gap: 0.5ch;
       text-decoration: none;
     }
@@ -46,5 +48,15 @@
   }
   .icon {
     width: 1.5ch;
+  }
+
+  @media (max-width: 70ch) {
+    nav a {
+      gap: 0;
+    }
+
+    nav a span {
+      display: none;
+    }
   }
 </style>
