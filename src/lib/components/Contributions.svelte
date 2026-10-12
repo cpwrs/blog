@@ -2,9 +2,6 @@
   export let contributions: number[][];
 
   const BOX_SIZE = 40;
-  const NO_COLOR = { r: 248, g: 247, b: 243 };
-  const LOW_COLOR = { r: 238, g: 246, b: 238 };
-  const HIGH_COLOR = { r: 83, g: 217, b: 156 };
 
   function maxCount(contributions: number[][]) {
     let max = 0;
@@ -21,14 +18,10 @@
   }
 
   function getColor(count: number, max: number) {
-    if (count === 0) {
-      return `rgb(${NO_COLOR.r}, ${NO_COLOR.g}, ${NO_COLOR.b})`;
-    }
-    const percent = count / max;
-    const r = Math.round(LOW_COLOR.r + (HIGH_COLOR.r - LOW_COLOR.r) * percent);
-    const g = Math.round(LOW_COLOR.g + (HIGH_COLOR.g - LOW_COLOR.g) * percent);
-    const b = Math.round(LOW_COLOR.b + (HIGH_COLOR.b - LOW_COLOR.b) * percent);
-    return `rgb(${r}, ${g}, ${b})`;
+    if (count === 0) return "var(--bg)";
+
+    const intensity = (count / max) * 100;
+    return `color-mix(in srgb, var(--contrib-low), var(--contrib-high) ${intensity}%)`;
   }
 
   $: width = contributions.length * BOX_SIZE;

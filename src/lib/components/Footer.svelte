@@ -6,8 +6,8 @@
 </script>
 
 <nav>
-  <a href="mailto:carson@linux.com">
-    <img class="icon" src={mail} alt="Email Icon" />
+  <a href="mailto:carson@linux.com" aria-label="Email Carson">
+    <span class="icon" style={`--icon: url("${mail}")`} aria-hidden="true"></span>
     <span class="email">Email</span>
   </a>
   <a
@@ -18,11 +18,11 @@
       ? `View commit ${commit} on GitHub`
       : "View repository on GitHub"}
   >
-    <img class="icon" src={git} alt="Git Logo" />
+    <span class="icon" style={`--icon: url("${git}")`} aria-hidden="true"></span>
     <span>Patch</span>
   </a>
-  <a href="">
-    <img class="icon" src={rss} alt="RSS Logo" />
+  <a href="" aria-label="Subscribe to RSS">
+    <span class="icon" style={`--icon: url("${rss}")`} aria-hidden="true"></span>
     <span>Subscribe</span>
   </a>
 </nav>
@@ -33,7 +33,7 @@
     column-gap: 2ch;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: flex-start;
     font-style: bold;
     & a {
       display: flex;
@@ -47,7 +47,12 @@
     }
   }
   .icon {
+    display: block;
     width: 1.5ch;
+    height: 1.5ch;
+    flex: none;
+    background: currentColor;
+    mask: var(--icon) center / contain no-repeat;
   }
 
   @media (max-width: 70ch) {
@@ -55,7 +60,7 @@
       gap: 0;
     }
 
-    nav a span {
+    nav a span:not(.icon) {
       display: none;
     }
   }
