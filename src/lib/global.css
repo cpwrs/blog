@@ -49,22 +49,12 @@
 
 :root {
   color-scheme: light;
-  --bg: light-dark(#f8f7f3, #221a14);
-  --fg: light-dark(#21221e, #f7f7f7);
-  --green: light-dark(#3a7e5d, #74b993);
+  --bg: #f8f7f3;
+  --fg: #21221e;
+  --green: #3a7e5d;
   --contrib-high: #53d99c;
-  --contrib-low: light-dark(#eef5ee, #221c15);
+  --contrib-low: #eef5ee;
   --line-height: 1.7rem;
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    color-scheme: dark;
-  }
 }
 
 * {
@@ -82,7 +72,6 @@ html {
   line-height: var(--line-height);
   font-size-adjust: 0.53;
   font-family: "EB Garamond", serif;
-  font-size: 14px;
 }
 
 body {
