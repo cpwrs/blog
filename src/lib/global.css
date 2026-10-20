@@ -66,18 +66,20 @@
 }
 
 html {
+  container-type: inline-size;
   overflow-x: hidden;
   background-color: var(--bg);
   color: var(--fg);
   line-height: var(--line-height);
   font-size-adjust: 0.53;
+  font-size: 14px;
   font-family: "EB Garamond", serif;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  max-width: 70ch;
+  max-width: 80ch;
   min-height: 100vh;
   padding: 2ch;
   margin-left: auto;

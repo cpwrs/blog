@@ -23,7 +23,7 @@
       text-decoration: underline;
     }
     & .title {
-      font-size: 1.3em;
+      font-size: 1.5em;
       flex-grow: 2;
     }
   }

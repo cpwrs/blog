@@ -55,7 +55,7 @@
     mask: var(--icon) center / contain no-repeat;
   }
 
-  @media (max-width: 70ch) {
+  @container (width <= 80ch) {
     nav a {
       gap: 0;
     }
