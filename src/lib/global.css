@@ -55,6 +55,7 @@
   --contrib-high: #53d99c;
   --contrib-low: #eef5ee;
   --line-height: 1.7rem;
+  --section-spacing: 2rem;
 }
 
 * {
@@ -82,6 +83,7 @@ body {
   max-width: 80ch;
   min-height: 100vh;
   padding: 2ch;
+  padding-top: var(--section-spacing);
   margin-left: auto;
   margin-right: auto;
   width: 100%;

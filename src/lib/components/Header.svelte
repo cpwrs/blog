@@ -6,7 +6,7 @@
 
 <style>
   header {
-    margin-bottom: 2ch;
+    margin-bottom: var(--section-spacing);
     font-weight: 400;
     & nav {
       display: flex;
@@ -24,6 +24,7 @@
     }
     & .title {
       font-size: 1.5em;
+      line-height: normal;
       flex-grow: 2;
     }
   }
