@@ -29,11 +29,12 @@
 
 <style>
   nav {
+    margin-top: auto;
     display: flex;
     column-gap: 2ch;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: flex-end;
     font-style: bold;
     & a {
       display: flex;

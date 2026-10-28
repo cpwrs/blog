@@ -1,4 +1,18 @@
 @font-face {
+  font-family: "Redaction 70";
+  src: url("/fonts/Redaction70-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Redaction 50";
+  src: url("/fonts/Redaction50-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
   font-family: "Berkeley Mono";
   src: url("/fonts/BerkeleyMono-Regular.woff2") format("woff2");
   font-weight: normal;
@@ -51,7 +65,7 @@
   color-scheme: light;
   --bg: #f8f7f3;
   --fg: #21221e;
-  --green: #3a7e5d;
+  --green: var(--contrib-high);
   --contrib-high: #53d99c;
   --contrib-low: #eef5ee;
   --line-height: 1.7rem;

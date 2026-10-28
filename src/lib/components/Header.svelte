@@ -23,7 +23,10 @@
       text-decoration: underline;
     }
     & .title {
-      font-size: 1.5em;
+      color: color-mix(in srgb, var(--fg) 60%, var(--bg));
+      font-family: "Redaction 70", serif;
+      font-style: italic;
+      font-size: 1.75em;
       line-height: normal;
       flex-grow: 2;
     }
