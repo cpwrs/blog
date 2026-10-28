@@ -96,6 +96,7 @@ body {
   flex-direction: column;
   max-width: 80ch;
   min-height: 100vh;
+  min-height: 100svh;
   padding: 2ch;
   padding-top: var(--section-spacing);
   margin-left: auto;
